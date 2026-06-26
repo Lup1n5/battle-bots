@@ -49,7 +49,7 @@ uint8_t Switch::getValue() {
     if (threeStage) {
         if (pulse > highLimit) {
             return 2;
-        } else if (threeStage < lowLimit) {
+        } else if (pulse < lowLimit) {
             return 0;
         } else {
             return 1;
