@@ -1,0 +1,19 @@
+{
+    "name": "battle-bots-lib",
+    "version": "0.0.1",
+    "description": "PlatformIO library for Battle Bots",
+    "keywords": [
+        "battle-bots",
+        "robotics",
+        "arduino"
+    ],
+    "authors": [
+        {
+            "name": "Lup1n5",
+            "maintainer": true
+        }
+    ],
+    "license": "MIT",
+    "frameworks": "arduino",
+    "platforms": "*"
+}
