@@ -24,7 +24,7 @@ int Motor::getOutput() {
 
     if (throttleMode) {
         pwm = constrain(pwm, pwmMin, pwmMax);
-        return map(pwm, pwmMin, pwmMax, 0, max_speed);
+        return map(pwm, pwmMin, pwmMax, min_speed, max_speed);
     }
 
     int offset = pwm - pwmCenter;
