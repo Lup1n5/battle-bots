@@ -1,20 +1,20 @@
 #include "battle-bots-lib.h"
 #include <Arduino.h>
 
-Motor::Motor(int pin, int deadzone, int min_speed, int max_speed)
+Motor::Motor(uint8_t pin, uint16_t deadzone, uint8_t min_speed, uint8_t max_speed)
     : pin(pin), deadzone(deadzone),
       min_speed(constrain(min_speed, 0, 255)),
       max_speed(constrain(max_speed, 0, 255)) {
     pinMode(pin, INPUT);
 }
 
-void Motor::setPWMRange(int pwmMin, int pwmMax, int pwmCenter) {
+void Motor::setPWMRange(uint16_t pwmMin, uint16_t pwmMax, uint16_t pwmCenter) {
     this->pwmMin = pwmMin;
     this->pwmMax = pwmMax;
     this->pwmCenter = pwmCenter;
 }
 
-int Motor::getJoystickValue() {
+uint16_t Motor::getJoystickValue() {
     return pulseIn(pin, HIGH, 25000);
 }
 
@@ -40,4 +40,24 @@ int Motor::getOutput() {
 
 void Motor::setThrottleMode(bool throttleMode) {
     this->throttleMode = throttleMode;
+}
+Switch::Switch(uint8_t pin, bool threeStage) : pin(pin), threeStage(threeStage) {
+    pinMode(pin, INPUT);
+}
+uint8_t Switch::getValue() {
+    int pulse = pulseIn(pin, HIGH, 25000);
+    if (threeStage) {
+        if (pulse > highLimit) {
+            return 2;
+        } else if (threeStage < lowLimit) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+    if (pulse > highLimit) return 1;
+    return 0;
+}
+uint8_t Switch::getLastValue() {
+    return (lastState == 3) ? getValue() : lastState;
 }
