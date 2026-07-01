@@ -1,5 +1,6 @@
 #ifndef battle_bots_lib_h
 #define battle_bots_lib_h
+#include <Arduino.h>
 
 class Motor {
 public:
